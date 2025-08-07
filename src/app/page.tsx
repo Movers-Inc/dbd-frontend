@@ -65,9 +65,20 @@ const HomePage: NextPage = () => {
       return <div>인트로 페이지 {pageNumber}</div>;
     }
 
+    const isCurrentPage = pageNumber === currentPage + 1;
+
     return (
-      <div className="flex flex-col items-start justify-start text-left">
-        <h1 className="text-[28px] font-freesentation-semibold font-semibold mb-4 leading-tight rounded">
+      <div className="flex flex-col items-start justify-start text-left w-full">
+        <h1
+          className={`text-[28px] font-freesentation-semibold font-semibold mb-4 leading-tight rounded px-5 ${
+            isCurrentPage ? "animate-fade-in-up" : ""
+          }`}
+          style={{
+            animation: isCurrentPage
+              ? "fadeInUp 0.5s ease-out forwards"
+              : "none"
+          }}
+        >
           {titleData.title.map((segment, index) => (
             <React.Fragment key={index}>
               <span style={{ color: segment.color }}>{segment.text}</span>
@@ -76,7 +87,7 @@ const HomePage: NextPage = () => {
           ))}
         </h1>
 
-        <IntroContent page={pageNumber} />
+        <IntroContent page={pageNumber} isActive={isCurrentPage} />
       </div>
     );
   };
@@ -96,10 +107,7 @@ const HomePage: NextPage = () => {
           className="h-full w-full"
         >
           {Array.from({ length: totalPages }).map((_, index) => (
-            <SwiperSlide
-              key={index}
-              className="flex items-start justify-start px-5"
-            >
+            <SwiperSlide key={index} className="flex items-start justify-start">
               <div className="w-full h-full flex items-start justify-start overflow-y-scroll">
                 {renderContent(index + 1)}
               </div>

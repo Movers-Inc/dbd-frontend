@@ -1,5 +1,80 @@
 @import "tailwindcss";
 
+* {
+  touch-action: manipulation;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+@keyframes growUp {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: var(--target-height);
+  }
+}
+
+.animate-grow-up {
+  height: 0;
+  animation: growUp 2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes scaleUp {
+  0% {
+    width: 0;
+    height: 0;
+    font-size: 0;
+  }
+  100% {
+    width: 140px;
+    height: 140px;
+    font-size: 32.5px;
+  }
+}
+
+.animate-scale-up {
+  width: 0;
+  height: 0;
+  animation: scaleUp 2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.animate-scale-up span {
+  font-size: 0;
+  animation: scaleUp 2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes textScale {
+  0% {
+    font-size: 0;
+  }
+  100% {
+    font-size: 18px;
+  }
+}
+
+.animate-text-scale {
+  font-size: 0;
+  animation: textScale 2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
 @font-face {
   font-family: "Freesentation-9Black";
   src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2")

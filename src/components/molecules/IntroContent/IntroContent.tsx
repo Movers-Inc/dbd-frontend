@@ -1,74 +1,215 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
+import Image from "next/image";
 
 interface IntroContentProps {
   page: number;
+  isActive?: boolean;
 }
 
-const IntroContent: FC<IntroContentProps> = ({ page }) => {
+const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
+  const [count1, setCount1] = useState("0.0");
+  const [count2, setCount2] = useState("0.0");
+
+  useEffect(() => {
+    if (isActive && page === 3) {
+      // 부드러운 곡선 이징 함수 (처음 빠르게, 점점 느려지게)
+      const customEasing = (t: number) => {
+        // cubic-bezier 느낌의 부드러운 곡선
+        return 1 - Math.pow(1 - t, 2.5);
+      };
+
+      const duration = 2000; // 2초 (CSS와 동일)
+      const target1 = 1.1;
+      const target2 = 4.5;
+      const startTime = Date.now();
+
+      let lastUpdate1 = -1;
+      let lastUpdate2 = -1;
+
+      const animate = () => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = customEasing(progress);
+
+        const current1 = target1 * easedProgress;
+        const current2 = target2 * easedProgress;
+
+        // 0.1 단위로만 업데이트 (더 부드럽게)
+        const display1 = Math.floor(current1 * 10) / 10;
+        const display2 = Math.floor(current2 * 10) / 10;
+
+        // 값이 실제로 바뀔 때만 업데이트 (소수점 한 자리 표시)
+        if (display1 !== lastUpdate1) {
+          setCount1(display1.toFixed(1));
+          lastUpdate1 = display1;
+        }
+
+        if (display2 !== lastUpdate2) {
+          setCount2(display2.toFixed(1));
+          lastUpdate2 = display2;
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+
+      requestAnimationFrame(animate);
+    } else {
+      // 비활성화되면 숫자 리셋
+      setCount1("0.0");
+      setCount2("0.0");
+    }
+  }, [isActive, page]);
+
   const renderContent = () => {
     switch (page) {
       case 1:
         return (
-          <div className="mt-4">
+          <div className="mt-4 flex flex-col items-start justify-start px-5">
             <video
-              src="/video/page1.mp4"
+              src="/intro/1/page1.mp4"
               autoPlay
               muted
               loop
-              className="w-full h-auto"
+              playsInline
+              className="w-full block"
+              style={{
+                backgroundColor: "transparent",
+                height: "400px",
+                objectFit: "cover",
+                objectPosition: "center"
+              }}
             />
           </div>
         );
 
       case 2:
         return (
-          <div className="flex flex-col items-start justify-start">
-            <p className="text-lg text-gray-600 mb-4">
-              수백 편의 논문 분석을 통해 밝혀진 진실입니다.
-            </p>
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <p className="text-blue-800 font-medium">
-                식단 기록의 힘: 단순하지만 강력한 다이어트 도구
-              </p>
-            </div>
+          <div className="mt-4 flex flex-col items-center justify-start px-5">
+            <video
+              src="/intro/2/page2.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full block"
+              style={{
+                backgroundColor: "transparent",
+                height: "283px",
+                objectFit: "cover",
+                objectPosition: "center"
+              }}
+            />
+            <img src="/intro/2/content.svg" alt="page2-1" />
           </div>
         );
 
       case 3:
         return (
-          <div className="flex flex-col items-start justify-start">
-            <p className="text-lg text-gray-600 mb-4">
-              매일 기록하는 것만으로도 이런 효과를 볼 수 있습니다.
+          <div className="flex flex-col items-center w-full mt-[56px]">
+            <p className="text-[24px] text-black font-freesentation font-medium mb-4">
+              [1개월 감량 체중 비교]
             </p>
-            <div className="flex items-center gap-4">
-              <div className="text-4xl font-bold text-blue-600">400%</div>
-              <div className="text-gray-600">
-                <p>감량 효과 증가</p>
-                <p className="text-sm">일반 다이어트 대비</p>
+            <div className="h-[300px] w-full border-b border-black mb-6 flex items-end justify-center gap-[22.5px]">
+              <div className="flex flex-col items-center relative">
+                <div
+                  className={`bg-gray-300 flex justify-center text-white font-bold pt-3 ${
+                    isActive ? "animate-grow-up" : ""
+                  }`}
+                  style={
+                    {
+                      width: "136px",
+                      fontSize: "32.5px",
+                      "--target-height": `${(1.1 / 4.5) * 300}px`,
+                      height: isActive
+                        ? "var(--target-height)"
+                        : `${(1.1 / 4.5) * 300}px`
+                    } as React.CSSProperties
+                  }
+                >
+                  {count1}kg
+                </div>
+                <div
+                  className={`absolute top-0 right-[60px] translate-x-full rotate-6 ${
+                    isActive ? "animate-scale-up" : ""
+                  }`}
+                  style={{
+                    transform: "translateY(calc(-100% + 20px)) rotate(0deg)",
+                    width: isActive ? "140px" : "0px",
+                    height: isActive ? "140px" : "0px"
+                  }}
+                >
+                  <Image
+                    src="/intro/3/arrow.svg"
+                    alt="arrow"
+                    width={140}
+                    height={140}
+                    className="w-full h-full"
+                  />
+                  <span
+                    className={`absolute text-black font-bold text-lg ${
+                      isActive ? "animate-text-scale" : ""
+                    }`}
+                    style={{
+                      bottom: "-24px",
+                      left: "59%",
+                      transform: "translate(-50%, 0%) rotate(-50deg)",
+                      fontSize: isActive ? "18px" : "0px"
+                    }}
+                  >
+                    400%
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <div
+                  className={`bg-[#1976D2] flex justify-center text-white font-bold pt-3 ${
+                    isActive ? "animate-grow-up" : ""
+                  }`}
+                  style={
+                    {
+                      width: "136px",
+                      fontSize: "32.5px",
+                      "--target-height": "300px",
+                      height: isActive ? "var(--target-height)" : "300px"
+                    } as React.CSSProperties
+                  }
+                >
+                  {count2}kg
+                </div>
               </div>
             </div>
+            <p className="text-[12px] text-black font-freesentation font-light mb-4">
+              출처 : Hollis et al., AJPM(2008)
+            </p>
           </div>
         );
 
       case 4:
         return (
-          <div className="flex flex-col items-start justify-start">
-            <p className="text-lg text-gray-600 mb-4">
-              왜 식단 기록이 효과적일까요?
-            </p>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                <span className="text-gray-700">무의식적 섭취를 의식화</span>
+          <div className="flex flex-col items-start justify-start pt-16 overflow-hidden relative">
+            <video
+              src="/intro/4/page4.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full block"
+              style={{
+                backgroundColor: "transparent",
+                height: "415px",
+                objectFit: "cover",
+                objectPosition: "center",
+                marginLeft: "13%"
+              }}
+            />
+            <div className="absolute top-1/2 left-1/4 bg-white rounded-lg p-3 shadow-lg border-2 border-gray-200">
+              <div className="text-sm font-medium text-black">
+                식단을 기록하세요!
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                <span className="text-gray-700">충동적 식사 패턴 차단</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                <span className="text-gray-700">자기 관찰력 향상</span>
-              </div>
+              <div className="absolute bottom-[-8px] left-6 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-white"></div>
             </div>
           </div>
         );
