@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        freesentation: ["Freesentation-9Black", "sans-serif"]
+        freesentation: ["Freesentation-9Black", "sans-serif"],
+        "freesentation-semibold": ["Freesentation-6SemiBold", "sans-serif"]
       },
       colors: {
         background: "var(--background)",

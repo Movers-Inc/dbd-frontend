@@ -7,3 +7,12 @@
   font-weight: 900;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "Freesentation-6SemiBold";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-6SemiBold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,214 @@
+[
+  {
+    "id": 1,
+    "title": [
+      {
+        "text": "의사들이 찾은",
+        "color": "#444444",
+        "lineBreak": true
+      },
+      {
+        "text": "위고비보다 나은",
+        "color": "#1976D2",
+        "lineBreak": true
+      },
+      {
+        "text": "다이어트 방법을 아시나요?",
+        "color": "#444444",
+        "lineBreak": false
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": [
+      {
+        "text": "수백편의 다이어트 논문 분석 결과,",
+        "color": "#444444",
+        "lineBreak": true
+      },
+      {
+        "text": "‘꾸준한 식단 기록’은",
+        "color": "#444444",
+        "lineBreak": true
+      },
+      {
+        "text": "위고비보다 강력합니다.",
+        "color": "#1976D2",
+        "lineBreak": false
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": [
+      {
+        "text": "꾸준히 식단 기록만 해도",
+        "color": "#444444",
+        "lineBreak": true
+      },
+      {
+        "text": "감량 효과",
+        "color": "#444444",
+        "lineBreak": false,
+        "space": true
+      },
+      {
+        "text": "400%",
+        "color": "#1976D2",
+        "lineBreak": false,
+        "space": true
+      },
+      {
+        "text": "상승",
+        "color": "#444444",
+        "lineBreak": false,
+        "space": false
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": [
+      {
+        "text": "식단 기록은 충동적 식사를 막는",
+        "color": "#444444",
+        "lineBreak": true
+      },
+      {
+        "text": "강력한",
+        "color": "#444444",
+        "lineBreak": false,
+        "space": true
+      },
+      {
+        "text": "브레이크",
+        "color": "#1976D2",
+        "lineBreak": false
+      },
+      {
+        "text": "가 됩니다.",
+        "color": "#444444",
+        "lineBreak": false
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": [
+      {
+        "text": "의지만으로 매일 기록을",
+        "color": "#444444",
+        "lineBreak": true
+      },
+      {
+        "text": "이어가긴 힘듭니다.",
+        "color": "#444444",
+        "lineBreak": true
+      },
+      {
+        "text": "93%",
+        "color": "#1976D2",
+        "lineBreak": false
+      },
+      {
+        "text": "는 한 달도 꾸준히 기록하지",
+        "color": "#444444",
+        "lineBreak": true
+      },
+      {
+        "text": "못합니다.",
+        "color": "#444444",
+        "lineBreak": false
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": [
+      {
+        "text": "기록을 까먹은 날, 건너뛰고 싶은날",
+        "color": "#444444",
+        "lineBreak": true
+      },
+      {
+        "text": "AI 코치",
+        "color": "#1976D2",
+        "lineBreak": false
+      },
+      {
+        "text": "의 전화가",
+        "color": "#444444",
+        "lineBreak": true
+      },
+      {
+        "text": "당신을 도와드립니다.",
+        "color": "#444444",
+        "lineBreak": true
+      }
+    ]
+  },
+
+  {
+    "id": 7,
+
+    "title": [
+      {
+        "text": "실수해도 AI는 질책하지 않습니다.",
+        "color": "#444444",
+        "lineBreak": true
+      },
+      {
+        "text": "기록이 끊기지 않으면",
+        "color": "#1976D2",
+        "lineBreak": true
+      },
+      {
+        "text": "다이어트는 성공합니다.",
+        "color": "#444444",
+        "lineBreak": true
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": [
+      {
+        "text": "AI 코치에게는 시간이 많습니다.",
+        "color": "#444444",
+        "lineBreak": true
+      },
+      {
+        "text": "다이어트 성공까지",
+        "color": "#444444",
+        "lineBreak": true
+      },
+      {
+        "text": "매일 귀찮게",
+        "color": "#1976D2",
+        "lineBreak": false
+      },
+      {
+        "text": " 해드립니다.",
+        "color": "#444444",
+        "lineBreak": true
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": [
+      {
+        "text": "이미 360명의 회원이",
+        "color": "#444444",
+        "lineBreak": true
+      },
+
+      {
+        "text": "함께하고 있어요.",
+        "color": "#444444",
+        "lineBreak": true
+      }
+    ]
+  }
+]

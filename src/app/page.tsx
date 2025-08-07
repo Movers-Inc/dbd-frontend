@@ -12,6 +12,25 @@ import classNames from "classnames";
 import "swiper/css";
 import "swiper/css/pagination";
 
+// Data
+import introTitles from "@/data/introTitles.json";
+
+// Components
+import IntroContent from "@/components/molecules/IntroContent/IntroContent";
+
+// Types
+interface TitleSegment {
+  text: string;
+  color: string;
+  lineBreak?: boolean;
+  space?: boolean;
+}
+
+interface IntroTitle {
+  id: number;
+  title: TitleSegment[];
+}
+
 const HomePage: NextPage = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const totalPages = 9;
@@ -37,8 +56,29 @@ const HomePage: NextPage = () => {
     setCurrentPage(swiper.activeIndex);
   };
 
-  const renderPageContent = (pageNumber: number) => {
-    return <div>인트로 페이지 {pageNumber}</div>;
+  const renderContent = (pageNumber: number) => {
+    const titleData = introTitles.find(
+      (item) => item.id === pageNumber
+    ) as IntroTitle;
+
+    if (!titleData) {
+      return <div>인트로 페이지 {pageNumber}</div>;
+    }
+
+    return (
+      <div className="flex flex-col items-start justify-start text-left">
+        <h1 className="text-[28px] font-freesentation-semibold font-semibold mb-4 leading-tight rounded">
+          {titleData.title.map((segment, index) => (
+            <React.Fragment key={index}>
+              <span style={{ color: segment.color }}>{segment.text}</span>
+              {segment.lineBreak ? <br /> : segment.space ? " " : ""}
+            </React.Fragment>
+          ))}
+        </h1>
+
+        <IntroContent page={pageNumber} />
+      </div>
+    );
   };
 
   return (
@@ -58,10 +98,10 @@ const HomePage: NextPage = () => {
           {Array.from({ length: totalPages }).map((_, index) => (
             <SwiperSlide
               key={index}
-              className="flex items-center justify-center px-5"
+              className="flex items-start justify-start px-5"
             >
-              <div className="w-full h-full border border-gray-300 rounded-lg flex items-center justify-center">
-                {renderPageContent(index + 1)}
+              <div className="w-full h-full flex items-start justify-start overflow-y-scroll">
+                {renderContent(index + 1)}
               </div>
             </SwiperSlide>
           ))}
