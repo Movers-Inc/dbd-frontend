@@ -96,7 +96,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
               className="w-full block"
               style={{
                 backgroundColor: "transparent",
-                height: "283px",
+                height: "285px",
                 objectFit: "cover",
                 objectPosition: "center"
               }}
