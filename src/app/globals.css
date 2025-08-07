@@ -75,6 +75,16 @@ html {
   animation: textScale 2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
+/* 스크롤바 숨기기 */
+.overflow-y-scroll {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.overflow-y-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 @font-face {
   font-family: "Freesentation-9Black";
   src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2")
