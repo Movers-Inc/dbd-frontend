@@ -99,14 +99,14 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
 
       case 2:
         return (
-          <div className="mt-4 flex flex-col items-center justify-start px-5">
+          <div className="mt-2 flex flex-col items-center justify-start">
             <video
               src="/intro/2/page2.mp4"
               autoPlay
               muted
               loop
               playsInline
-              className="w-full block"
+              className="block mb-2"
               style={{
                 backgroundColor: "transparent",
                 height: "300px",
@@ -221,36 +221,39 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
             {isActive && (
               <>
                 <div
-                  className={`absolute top-2/20 left-1/15 bg-[#EBEBEB] rounded-lg px-3 py-2 transition-opacity duration-500 ${
+                  className={`fixed top-5/12 left-1/4 transform -translate-x-1/2 -translate-y-1/2 bg-[#EBEBEB] rounded-lg px-3 py-2 transition-opacity duration-500 ${
                     currentBubble === 0 ? "opacity-100" : "opacity-0"
                   }`}
+                  style={{ zIndex: 1000 }}
                 >
                   <div className="text-[20px] font-freesentation-semibold font-medium text-[#444444]">
                     맞다, <br /> 기록해야 하는데...
                   </div>
-                  <div className="absolute bottom-[-8px] right-6 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#EBEBEB]"></div>
+                  <div className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#EBEBEB]"></div>
                 </div>
 
                 <div
-                  className={`absolute top-6/20 left-2/15 bg-[#EBEBEB] rounded-lg px-3 py-2 transition-opacity duration-500 ${
+                  className={`fixed top-5/12 left-1/4 transform -translate-x-1/2 -translate-y-1/2 bg-[#EBEBEB] rounded-lg px-3 py-2 transition-opacity duration-500 ${
                     currentBubble === 1 ? "opacity-100" : "opacity-0"
                   }`}
+                  style={{ zIndex: 1000 }}
                 >
                   <div className="text-[20px] font-freesentation-semibold font-medium text-[#444444]">
                     먹고 싶은 게, <br /> 정말 맞을까?
                   </div>
-                  <div className="absolute bottom-[-8px] right-9 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#EBEBEB]"></div>
+                  <div className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#EBEBEB]"></div>
                 </div>
 
                 <div
-                  className={`absolute top-10/20 left-1/15 bg-[#EBEBEB] rounded-lg px-3 py-2 transition-opacity duration-500 ${
+                  className={`fixed top-5/12 left-1/4 transform -translate-x-1/2 -translate-y-1/2 bg-[#EBEBEB] rounded-lg px-3 py-2 transition-opacity duration-500 ${
                     currentBubble === 2 ? "opacity-100" : "opacity-0"
                   }`}
+                  style={{ zIndex: 1000 }}
                 >
                   <div className="text-[20px] font-freesentation-semibold font-medium text-[#444444]">
                     조금만 참아보자...
                   </div>
-                  <div className="absolute bottom-[-8px] right-8 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#EBEBEB]"></div>
+                  <div className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#EBEBEB]"></div>
                 </div>
               </>
             )}
@@ -260,7 +263,10 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
       case 5:
         return (
           <div className="flex flex-col items-start justify-start px-5">
-            <div className="grid grid-cols-5 gap-4 w-full mt-[88px] relative absolute top-1/2 left-1/2 transform -translate-x-1/2 ">
+            <div
+              className="grid grid-cols-5 gap-3 w-full fixed top-1/2 left-1/2 transform -translate-x-1/2"
+              style={{ zIndex: 1000 }}
+            >
               {/* 첫 번째 행: Crying 5개 */}
               <LottieAnimation type="cry" width={70} height={70} />
               <div className="relative">
@@ -283,7 +289,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
               <div className="relative">
                 <LottieAnimation type="smile" width={70} height={70} />
                 {/* 기록 성공! 말풍선 */}
-                <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-[#FFF4D4] px-3 py-2 rounded-lg text-[#444444] font-freesentation-semibold font-medium text-[16px] whitespace-nowrap animate-floating-delayed">
+                <div className="absolute -bottom-12 left-1/3 transform -translate-x-1/2 bg-[#FFF4D4] px-3 py-2 rounded-lg text-[#444444] font-freesentation-semibold font-medium text-[16px] whitespace-nowrap animate-floating-delayed">
                   기록 성공!
                   <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-[#FFF4D4]"></div>
                 </div>
@@ -294,8 +300,8 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
 
       case 6:
         return (
-          <div className="flex flex-col items-start justify-start mt-10 relative">
-            <img src="/intro/6/page6.png" alt="content" className="w-full" />
+          <div className="flex flex-col items-start justify-start mt-[5vh] relative">
+            <img src="/intro/6/page6.svg" alt="content" className="w-full" />
             <div className="absolute bottom-4 left-1/2 transform translate-x-[10px] rotate-[40deg]">
               <LottieAnimation type="exclamation" width={80} height={80} />
             </div>
@@ -304,7 +310,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
 
       case 7:
         return (
-          <div className="flex flex-col items-center justify-start mt-9 relative">
+          <div className="flex flex-col items-center justify-start mt-[4vh] relative">
             <img
               src="/intro/7/page7.png"
               alt="content"
@@ -312,7 +318,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
             />
 
             {/* 오른쪽 위 중간 말풍선 */}
-            <div className="absolute top-2/7 left-3/4 transform -translate-x-1/2 -translate-y-1/2 bg-[#EBEBEB] rounded-lg px-3 py-2 whitespace-nowrap">
+            <div className="absolute top-2/7 left-3/4 transform -translate-x-1/2 -translate-y-1/2 bg-[#EBEBEB] rounded-lg px-3 py-2 whitespace-nowrap floating">
               <div className="text-[16px] font-freesentation-medium text-[#444444]">
                 오늘 못 참고
                 <br />
@@ -322,7 +328,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
             </div>
 
             {/* 왼쪽 아래 중간 말풍선 */}
-            <div className="absolute bottom-1/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2 bg-[#1976D2] rounded-lg px-3 py-2 whitespace-nowrap">
+            <div className="absolute bottom-1/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2 bg-[#1976D2] rounded-lg px-3 py-2 whitespace-nowrap floating-delayed">
               <div className="text-[16px] font-freesentation-medium text-white">
                 기록했으니 괜찮아요.
                 <br />
@@ -344,10 +350,10 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
               muted
               loop
               playsInline
-              className="w-full block"
+              className="block"
               style={{
                 backgroundColor: "transparent",
-                height: "400px",
+                height: "380px",
                 objectFit: "cover",
                 objectPosition: "center"
               }}
@@ -372,9 +378,9 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
               touchAction: "none"
             }}
           >
-            <div className="flex items-center justify-start px-5 gap-2 mb-3 w-full">
-              <img src="/intro/9/left.svg" alt="content" className="flex-1" />
-              <img src="/intro/9/right.svg" alt="content" className="flex-1" />
+            <div className="flex items-center justify-center mb-3 w-full gap-2 px-5">
+              <img src="/intro/9/left.svg" alt="content" className="w-1/2" />
+              <img src="/intro/9/right.svg" alt="content" className="w-1/2" />
             </div>
             <div className="flow-container">
               <div className="auto-flow-content gap-2">

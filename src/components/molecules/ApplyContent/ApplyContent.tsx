@@ -461,24 +461,56 @@ const ApplyContent: FC<ApplyContentProps> = () => {
                   {...register("cardNumber1", { required: true })}
                   type="text"
                   maxLength={4}
+                  pattern="[0-9]*"
+                  inputMode="numeric"
+                  onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(
+                      /[^0-9]/g,
+                      ""
+                    );
+                  }}
                   className="w-full px-2 py-3 rounded-[8px] border border-[#CECECE] text-[14px] text-center focus:outline-none focus:border-[#1976D2]"
                 />
                 <input
                   {...register("cardNumber2", { required: true })}
                   type="password"
                   maxLength={4}
+                  pattern="[0-9]*"
+                  inputMode="numeric"
+                  onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(
+                      /[^0-9]/g,
+                      ""
+                    );
+                  }}
                   className="w-full px-2 py-3 rounded-[8px] border border-[#CECECE] text-[14px] text-center focus:outline-none focus:border-[#1976D2]"
                 />
                 <input
                   {...register("cardNumber3", { required: true })}
                   type="password"
                   maxLength={4}
+                  pattern="[0-9]*"
+                  inputMode="numeric"
+                  onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(
+                      /[^0-9]/g,
+                      ""
+                    );
+                  }}
                   className="w-full px-2 py-3 rounded-[8px] border border-[#CECECE] text-[14px] text-center focus:outline-none focus:border-[#1976D2]"
                 />
                 <input
                   {...register("cardNumber4", { required: true })}
                   type="text"
                   maxLength={4}
+                  pattern="[0-9]*"
+                  inputMode="numeric"
+                  onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(
+                      /[^0-9]/g,
+                      ""
+                    );
+                  }}
                   className="w-full px-2 py-3 rounded-[8px] border border-[#CECECE] text-[14px] text-center focus:outline-none focus:border-[#1976D2]"
                 />
               </div>
@@ -495,6 +527,14 @@ const ApplyContent: FC<ApplyContentProps> = () => {
                   {...register("cvc", { required: true })}
                   type="password"
                   maxLength={3}
+                  pattern="[0-9]*"
+                  inputMode="numeric"
+                  onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(
+                      /[^0-9]/g,
+                      ""
+                    );
+                  }}
                   className="w-full px-2 py-3 rounded-[8px] border border-[#CECECE] text-[14px] text-left focus:outline-none focus:border-[#1976D2]"
                 />
               </div>
@@ -509,6 +549,14 @@ const ApplyContent: FC<ApplyContentProps> = () => {
                   type="text"
                   maxLength={4}
                   placeholder="MMYY"
+                  pattern="[0-9]*"
+                  inputMode="numeric"
+                  onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(
+                      /[^0-9]/g,
+                      ""
+                    );
+                  }}
                   className="w-full px-2 py-3 rounded-[8px] border border-[#CECECE] text-[14px] text-left focus:outline-none focus:border-[#1976D2]"
                 />
               </div>
@@ -526,6 +574,14 @@ const ApplyContent: FC<ApplyContentProps> = () => {
                     {...register("cardPassword", { required: true })}
                     type="password"
                     maxLength={2}
+                    pattern="[0-9]*"
+                    inputMode="numeric"
+                    onInput={(e) => {
+                      e.currentTarget.value = e.currentTarget.value.replace(
+                        /[^0-9]/g,
+                        ""
+                      );
+                    }}
                     className="w-full px-2 py-3 rounded-[8px] border border-[#CECECE] text-[14px] text-left focus:outline-none focus:border-[#1976D2]"
                   />
                   <div className="w-full" />

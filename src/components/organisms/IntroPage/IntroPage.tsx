@@ -98,7 +98,7 @@ const IntroPage: React.FC<IntroPageProps> = ({ onComplete }) => {
   };
 
   return (
-    <div className="pt-[88px] text-black h-screen flex flex-col">
+    <div className="pt-[8vh] text-black h-screen flex flex-col">
       {/* Swiper 콘텐츠 영역 */}
       <div className="flex-1 overflow-hidden">
         <Swiper
@@ -113,7 +113,7 @@ const IntroPage: React.FC<IntroPageProps> = ({ onComplete }) => {
         >
           {Array.from({ length: totalPages }).map((_, index) => (
             <SwiperSlide key={index} className="flex items-start justify-start">
-              <div className="w-full h-full flex items-start justify-start overflow-y-scroll">
+              <div className="w-full h-full flex items-start justify-start overflow-y-hidden">
                 {renderContent(index + 1)}
               </div>
             </SwiperSlide>
@@ -122,7 +122,7 @@ const IntroPage: React.FC<IntroPageProps> = ({ onComplete }) => {
       </div>
 
       {/* 페이지 인디케이터 */}
-      <div className="flex justify-center space-x-2 mb-20 px-5">
+      <div className="flex justify-center space-x-2 mb-[4vh] px-5">
         {Array.from({ length: totalPages }).map((_, index) => (
           <button
             key={index}
@@ -138,11 +138,11 @@ const IntroPage: React.FC<IntroPageProps> = ({ onComplete }) => {
       </div>
 
       {/* 네비게이션 버튼 */}
-      <div className="flex gap-4 mb-10 px-5">
+      <div className="flex gap-4 mb-[5vh] px-5">
         {currentPage > 0 && currentPage < totalPages - 1 && (
           <button
             onClick={prevPage}
-            className="px-4 py-[18px] rounded-[12px] text-[20px] font-medium font-freesentation bg-[#F5F5F5] text-[#666666] flex-1"
+            className="px-4 py-[18px] rounded-[12px] text-[20px] font-freesentation-medium bg-[#F5F5F5] text-[#666666] flex-1"
           >
             이전
           </button>
@@ -150,7 +150,7 @@ const IntroPage: React.FC<IntroPageProps> = ({ onComplete }) => {
         <button
           onClick={nextPage}
           className={classNames(
-            "px-4 py-[18px] rounded-[12px] text-[20px] font-medium font-freesentation bg-[#1976D2] text-white",
+            "px-4 py-[18px] rounded-[12px] text-[20px] font-freesentation-medium bg-[#1976D2] text-white",
             currentPage === 0 || currentPage === totalPages - 1
               ? "w-full"
               : "flex-1"

@@ -2,6 +2,13 @@
 
 * {
   touch-action: manipulation;
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
 
 html {
@@ -239,6 +246,28 @@ html {
   transform-origin: center center;
 }
 
+/* Floating 애니메이션 */
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+.floating-delayed {
+  animation: floating 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
 /* 자동 흐름 애니메이션 */
 @keyframes scrollLeft {
   0% {
@@ -260,4 +289,14 @@ html {
   overflow: hidden;
   width: 100%;
   position: relative;
+}
+
+/* 스크롤바 숨기기 */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
