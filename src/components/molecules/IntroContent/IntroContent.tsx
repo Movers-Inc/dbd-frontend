@@ -10,84 +10,18 @@ interface IntroContentProps {
 const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
   const [count1, setCount1] = useState("0.0");
   const [count2, setCount2] = useState("0.0");
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [currentBubble, setCurrentBubble] = useState(0);
 
+  // 말풍선 슬라이드쇼 애니메이션
   useEffect(() => {
-    const scrollElement = scrollRef.current;
-    if (!scrollElement) return;
+    if (page === 4 && isActive) {
+      const bubbleInterval = setInterval(() => {
+        setCurrentBubble((prev) => (prev + 1) % 3); // 0, 1, 2 순환
+      }, 2000); // 2초마다 전환
 
-    let startX = 0;
-    let startY = 0;
-    let isScrolling = false;
-
-    const handleTouchStart = (e: TouchEvent) => {
-      const touch = e.touches[0];
-      startX = touch.clientX;
-      startY = touch.clientY;
-      isScrolling = false;
-
-      // 터치 시작시 무조건 상위 이벤트 차단
-      e.stopImmediatePropagation();
-      e.stopPropagation();
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      const touch = e.touches[0];
-      const deltaX = Math.abs(touch.clientX - startX);
-      const deltaY = Math.abs(touch.clientY - startY);
-
-      // 가로 이동이 세로 이동보다 크면 가로 스크롤로 판단
-      if (deltaX > deltaY && deltaX > 10) {
-        isScrolling = true;
-      }
-
-      // 가로 스크롤 중이거나 스크롤 가능한 영역이면 상위 이벤트 완전 차단
-      const element = e.currentTarget as HTMLElement;
-      if (isScrolling || element.scrollWidth > element.clientWidth) {
-        e.stopImmediatePropagation();
-        e.stopPropagation();
-        e.preventDefault();
-      }
-    };
-
-    const handleTouchEnd = (e: TouchEvent) => {
-      // 터치 종료시도 상위 이벤트 차단
-      e.stopImmediatePropagation();
-      e.stopPropagation();
-      isScrolling = false;
-    };
-
-    // capture: true로 설정해서 더 일찍 이벤트를 잡음
-    scrollElement.addEventListener("touchstart", handleTouchStart, {
-      passive: false,
-      capture: true
-    });
-    scrollElement.addEventListener("touchmove", handleTouchMove, {
-      passive: false,
-      capture: true
-    });
-    scrollElement.addEventListener("touchend", handleTouchEnd, {
-      passive: false,
-      capture: true
-    });
-
-    // 마우스 이벤트도 추가로 차단
-    const handleMouseDown = (e: MouseEvent) => {
-      e.stopImmediatePropagation();
-      e.stopPropagation();
-    };
-
-    scrollElement.addEventListener("mousedown", handleMouseDown, {
-      capture: true
-    });
-
-    return () => {
-      scrollElement.removeEventListener("touchstart", handleTouchStart, true);
-      scrollElement.removeEventListener("touchmove", handleTouchMove, true);
-      scrollElement.removeEventListener("touchend", handleTouchEnd, true);
-      scrollElement.removeEventListener("mousedown", handleMouseDown, true);
-    };
-  }, []);
+      return () => clearInterval(bubbleInterval);
+    }
+  }, [page, isActive]);
 
   useEffect(() => {
     if (isActive && page === 3) {
@@ -268,7 +202,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
 
       case 4:
         return (
-          <div className="flex flex-col items-start justify-start pt-16 overflow-hidden relative">
+          <div className="flex flex-col items-start justify-start pt-16 overflow-hidden relative h-[600px]">
             <video
               src="/intro/4/page4.mp4"
               autoPlay
@@ -278,29 +212,41 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
               className="w-full block"
               style={{
                 backgroundColor: "transparent",
-                height: "415px",
+                height: "500px",
                 objectFit: "cover",
                 objectPosition: "center",
-                marginLeft: "13%"
+                marginLeft: "10%"
               }}
             />
             {isActive && (
               <>
-                <div className="absolute top-2/20 left-1/10 bg-[#EBEBEB] rounded-lg px-3 py-2 speech-bubble-1">
+                <div
+                  className={`absolute top-2/20 left-1/15 bg-[#EBEBEB] rounded-lg px-3 py-2 transition-opacity duration-500 ${
+                    currentBubble === 0 ? "opacity-100" : "opacity-0"
+                  }`}
+                >
                   <div className="text-[20px] font-freesentation-semibold font-medium text-[#444444]">
                     맞다, <br /> 기록해야 하는데...
                   </div>
                   <div className="absolute bottom-[-8px] right-6 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#EBEBEB]"></div>
                 </div>
 
-                <div className="absolute top-6/20 left-2/10 bg-[#EBEBEB] rounded-lg px-3 py-2 speech-bubble-2">
+                <div
+                  className={`absolute top-6/20 left-2/15 bg-[#EBEBEB] rounded-lg px-3 py-2 transition-opacity duration-500 ${
+                    currentBubble === 1 ? "opacity-100" : "opacity-0"
+                  }`}
+                >
                   <div className="text-[20px] font-freesentation-semibold font-medium text-[#444444]">
                     먹고 싶은 게, <br /> 정말 맞을까?
                   </div>
                   <div className="absolute bottom-[-8px] right-9 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#EBEBEB]"></div>
                 </div>
 
-                <div className="absolute top-10/20 left-1/10 bg-[#EBEBEB] rounded-lg px-3 py-2 speech-bubble-3">
+                <div
+                  className={`absolute top-10/20 left-1/15 bg-[#EBEBEB] rounded-lg px-3 py-2 transition-opacity duration-500 ${
+                    currentBubble === 2 ? "opacity-100" : "opacity-0"
+                  }`}
+                >
                   <div className="text-[20px] font-freesentation-semibold font-medium text-[#444444]">
                     조금만 참아보자...
                   </div>
@@ -314,7 +260,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
       case 5:
         return (
           <div className="flex flex-col items-start justify-start px-5">
-            <div className="grid grid-cols-5 gap-4 w-full mt-[88px] relative">
+            <div className="grid grid-cols-5 gap-4 w-full mt-[88px] relative absolute top-1/2 left-1/2 transform -translate-x-1/2 ">
               {/* 첫 번째 행: Crying 5개 */}
               <LottieAnimation type="cry" width={70} height={70} />
               <div className="relative">
@@ -358,8 +304,34 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
 
       case 7:
         return (
-          <div className="flex flex-col items-center justify-start mt-9">
-            <img src="/intro/7/page7.png" alt="content" className="w-[60%]" />
+          <div className="flex flex-col items-center justify-start mt-9 relative">
+            <img
+              src="/intro/7/page7.png"
+              alt="content"
+              className="w-[60%] clock-alarm"
+            />
+
+            {/* 오른쪽 위 중간 말풍선 */}
+            <div className="absolute top-2/7 left-3/4 transform -translate-x-1/2 -translate-y-1/2 bg-[#EBEBEB] rounded-lg px-3 py-2 whitespace-nowrap">
+              <div className="text-[16px] font-freesentation-medium text-[#444444]">
+                오늘 못 참고
+                <br />
+                야식 먹었어요 ㅠㅠ
+              </div>
+              <div className="absolute bottom-[-8px] left-4 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#EBEBEB]"></div>
+            </div>
+
+            {/* 왼쪽 아래 중간 말풍선 */}
+            <div className="absolute bottom-1/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2 bg-[#1976D2] rounded-lg px-3 py-2 whitespace-nowrap">
+              <div className="text-[16px] font-freesentation-medium text-white">
+                기록했으니 괜찮아요.
+                <br />
+                야식은 다음주에
+                <br />
+                조금씩 빼봐요 😊
+              </div>
+              <div className="absolute bottom-[-8px] right-4 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#1976D2]"></div>
+            </div>
           </div>
         );
 
@@ -375,7 +347,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
               className="w-full block"
               style={{
                 backgroundColor: "transparent",
-                height: "330px",
+                height: "400px",
                 objectFit: "cover",
                 objectPosition: "center"
               }}
@@ -404,117 +376,121 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
               <img src="/intro/9/left.svg" alt="content" className="flex-1" />
               <img src="/intro/9/right.svg" alt="content" className="flex-1" />
             </div>
-            <div
-              ref={scrollRef}
-              className="flex items-start justify-start gap-4 w-full overflow-x-scroll overflow-y-hidden"
-              style={{
-                touchAction: "pan-x",
-                WebkitOverflowScrolling: "touch",
-                overscrollBehavior: "contain",
-                pointerEvents: "auto",
-                isolation: "isolate"
-              }}
-              onTouchStart={(e) => {
-                e.nativeEvent.stopImmediatePropagation();
-                e.stopPropagation();
-                // 터치 시작 좌표 저장
-                const touch = e.touches[0];
-                (e.currentTarget as any).startX = touch.clientX;
-                (e.currentTarget as any).startY = touch.clientY;
-                // 부모의 터치 이벤트 완전히 차단
-                if (e.currentTarget.parentElement) {
-                  e.currentTarget.parentElement.style.touchAction = "none";
-                }
-              }}
-              onTouchMove={(e) => {
-                e.nativeEvent.stopImmediatePropagation();
-                e.stopPropagation();
-                // 수평 스크롤만 허용, 수직 스크롤 차단
-                const touch = e.touches[0];
-                const deltaX = Math.abs(
-                  touch.clientX - (e.currentTarget as any).startX || 0
-                );
-                const deltaY = Math.abs(
-                  touch.clientY - (e.currentTarget as any).startY || 0
-                );
+            <div className="flow-container">
+              <div className="auto-flow-content gap-2">
+                {/* 첫 번째 세트 */}
+                <div className="flex flex-col items-center justify-start flex-shrink-0 ml-5">
+                  <img
+                    src="/intro/9/slide1.png"
+                    alt="slide1"
+                    className="h-[140px] w-auto mb-2"
+                    style={{ userSelect: "none", pointerEvents: "none" }}
+                  />
+                  <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
+                    # 82일 연속 기록 # 13kg 감량
+                  </span>
+                </div>
+                <div className="flex flex-col items-center justify-start flex-shrink-0">
+                  <img
+                    src="/intro/9/slide2.png"
+                    alt="slide2"
+                    className="h-[140px] w-auto mb-2"
+                    style={{ userSelect: "none", pointerEvents: "none" }}
+                  />
+                  <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
+                    # 122일 연속 기록 # 15kg 감량
+                  </span>
+                </div>
+                <div className="flex flex-col items-center justify-start flex-shrink-0">
+                  <img
+                    src="/intro/9/slide3.png"
+                    alt="slide3"
+                    className="h-[140px] w-auto mb-2"
+                    style={{ userSelect: "none", pointerEvents: "none" }}
+                  />
+                  <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
+                    # 95일 연속 기록 # 11kg 감량
+                  </span>
+                </div>
+                <div className="flex flex-col items-center justify-start flex-shrink-0">
+                  <img
+                    src="/intro/9/slide4.png"
+                    alt="slide4"
+                    className="h-[140px] w-auto mb-2"
+                    style={{ userSelect: "none", pointerEvents: "none" }}
+                  />
+                  <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
+                    # 55일 연속 기록 # 7kg 감량
+                  </span>
+                </div>
+                <div className="flex flex-col items-center justify-start flex-shrink-0 mr-5">
+                  <img
+                    src="/intro/9/slide5.png"
+                    alt="slide5"
+                    className="h-[140px] w-auto mb-2"
+                    style={{ userSelect: "none", pointerEvents: "none" }}
+                  />
+                  <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
+                    # 158일 연속 기록 # 16kg 감량
+                  </span>
+                </div>
 
-                if (deltaX > deltaY) {
-                  // 수평 드래그가 더 크면 스와이퍼 이벤트 차단
-                  e.preventDefault();
-                }
-              }}
-              onTouchEnd={(e) => {
-                e.nativeEvent.stopImmediatePropagation();
-                e.stopPropagation();
-                // 부모의 터치 액션 복원
-                if (e.currentTarget.parentElement) {
-                  e.currentTarget.parentElement.style.touchAction = "auto";
-                }
-              }}
-              onMouseDown={(e) => {
-                e.stopPropagation();
-                // 마우스 드래그도 부모로 전파되지 않도록
-                e.preventDefault();
-              }}
-              onWheel={(e) => {
-                // 휠 이벤트도 차단하여 스와이퍼로 전파되지 않도록
-                e.stopPropagation();
-              }}
-            >
-              <div className="flex flex-col items-center justify-start flex-shrink-0 ml-5">
-                <img
-                  src="/intro/9/slide1.png"
-                  alt="slide1"
-                  className="h-[140px] w-auto mb-2"
-                  style={{ userSelect: "none", pointerEvents: "none" }}
-                />
-                <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
-                  # 82일 연속 기록 # 13kg 감량
-                </span>
-              </div>
-              <div className="flex flex-col items-center justify-start flex-shrink-0">
-                <img
-                  src="/intro/9/slide2.png"
-                  alt="slide2"
-                  className="h-[140px] w-auto mb-2"
-                  style={{ userSelect: "none", pointerEvents: "none" }}
-                />
-                <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
-                  # 122일 연속 기록 # 15kg 감량
-                </span>
-              </div>
-              <div className="flex flex-col items-center justify-start flex-shrink-0">
-                <img
-                  src="/intro/9/slide3.png"
-                  alt="slide3"
-                  className="h-[140px] w-auto mb-2"
-                  style={{ userSelect: "none", pointerEvents: "none" }}
-                />
-                <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
-                  # 95일 연속 기록 # 11kg 감량
-                </span>
-              </div>
-              <div className="flex flex-col items-center justify-start flex-shrink-0">
-                <img
-                  src="/intro/9/slide4.png"
-                  alt="slide4"
-                  className="h-[140px] w-auto mb-2"
-                  style={{ userSelect: "none", pointerEvents: "none" }}
-                />
-                <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
-                  # 55일 연속 기록 # 7kg 감량
-                </span>
-              </div>
-              <div className="flex flex-col items-center justify-start flex-shrink-0 mr-5">
-                <img
-                  src="/intro/9/slide5.png"
-                  alt="slide5"
-                  className="h-[140px] w-auto mb-2"
-                  style={{ userSelect: "none", pointerEvents: "none" }}
-                />
-                <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
-                  # 158일 연속 기록 # 16kg 감량
-                </span>
+                {/* 두 번째 세트 (무한 루프용) */}
+                <div className="flex flex-col items-center justify-start flex-shrink-0 ml-5">
+                  <img
+                    src="/intro/9/slide1.png"
+                    alt="slide1"
+                    className="h-[140px] w-auto mb-2"
+                    style={{ userSelect: "none", pointerEvents: "none" }}
+                  />
+                  <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
+                    # 82일 연속 기록 # 13kg 감량
+                  </span>
+                </div>
+                <div className="flex flex-col items-center justify-start flex-shrink-0">
+                  <img
+                    src="/intro/9/slide2.png"
+                    alt="slide2"
+                    className="h-[140px] w-auto mb-2"
+                    style={{ userSelect: "none", pointerEvents: "none" }}
+                  />
+                  <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
+                    # 122일 연속 기록 # 15kg 감량
+                  </span>
+                </div>
+                <div className="flex flex-col items-center justify-start flex-shrink-0">
+                  <img
+                    src="/intro/9/slide3.png"
+                    alt="slide3"
+                    className="h-[140px] w-auto mb-2"
+                    style={{ userSelect: "none", pointerEvents: "none" }}
+                  />
+                  <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
+                    # 95일 연속 기록 # 11kg 감량
+                  </span>
+                </div>
+                <div className="flex flex-col items-center justify-start flex-shrink-0">
+                  <img
+                    src="/intro/9/slide4.png"
+                    alt="slide4"
+                    className="h-[140px] w-auto mb-2"
+                    style={{ userSelect: "none", pointerEvents: "none" }}
+                  />
+                  <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
+                    # 55일 연속 기록 # 7kg 감량
+                  </span>
+                </div>
+                <div className="flex flex-col items-center justify-start flex-shrink-0 mr-5">
+                  <img
+                    src="/intro/9/slide5.png"
+                    alt="slide5"
+                    className="h-[140px] w-auto mb-2"
+                    style={{ userSelect: "none", pointerEvents: "none" }}
+                  />
+                  <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
+                    # 158일 연속 기록 # 16kg 감량
+                  </span>
+                </div>
               </div>
             </div>
           </div>

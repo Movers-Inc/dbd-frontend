@@ -14,22 +14,22 @@ const ApplyPage: React.FC<ApplyPageProps> = () => {
   const [logoAnimationComplete, setLogoAnimationComplete] = useState(false);
 
   useEffect(() => {
-    // 컴포넌트가 마운트된 후 텍스트 애니메이션 시작
+    // 컴포넌트가 마운트된 즉시 텍스트 애니메이션 시작
     const textTimer = setTimeout(() => {
       setShowAnimation(true);
-    }, 300);
+    }, 100); // 300ms -> 100ms로 단축
 
     // 텍스트 애니메이션 완료 후 로고/텍스트 이동 애니메이션 시작
     const transitionTimer = setTimeout(() => {
       setStartTransition(true);
       // 로고 이동과 동시에 ApplyContent 표시 시작
       setShowApplyContent(true);
-    }, 3000); // 텍스트 애니메이션 시간 + 잠시 대기
+    }, 2800); // 3000ms -> 2800ms로 단축
 
     // 로고 애니메이션 완료 후 상태 변경
     const logoCompleteTimer = setTimeout(() => {
       setLogoAnimationComplete(true);
-    }, 3700); // 이동 애니메이션 완료 시점
+    }, 3500); // 3700ms -> 3500ms로 단축
 
     return () => {
       clearTimeout(textTimer);
@@ -73,19 +73,22 @@ const ApplyPage: React.FC<ApplyPageProps> = () => {
         {/* 애니메이션 중인 로고 */}
         {!logoAnimationComplete && (
           <div
-            className={`absolute transition-all duration-700 ease-in-out ${
-              startTransition
-                ? "top-4 right-4 w-20 h-auto"
-                : "top-[88px] left-1/2 transform -translate-x-1/2 w-full"
-            }`}
-            style={{ zIndex: 70 }}
+            className="absolute transition-all duration-700 ease-in-out"
+            style={{
+              zIndex: 70,
+              top: startTransition ? "16px" : "88px",
+              left: "50%",
+              transform: startTransition
+                ? "translateX(calc(50vw - 170px))"
+                : "translateX(-50%)",
+              width: startTransition ? "170px" : "500px",
+              height: "auto"
+            }}
           >
             <img
               src="/logo.svg"
               alt="logo"
-              className={`h-auto transition-all duration-700 ease-in-out ${
-                startTransition ? "w-20" : "w-full"
-              }`}
+              className="w-full h-auto transition-all duration-700 ease-in-out"
               style={{
                 opacity: startTransition ? 0.3 : 1
               }}
@@ -112,7 +115,7 @@ const ApplyPage: React.FC<ApplyPageProps> = () => {
               className="text-[24px] text-black mt-2 whitespace-nowrap overflow-hidden"
               style={{ fontFamily: "S-CoreDream-5Medium", marginLeft: "80px" }}
             >
-              {createTextSpan("데이바이데이 코치와 함께!", 0.6)}
+              {createTextSpan("데이바이데이 코치와 함께!")}
             </p>
           </div>
         </div>

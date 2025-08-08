@@ -136,21 +136,33 @@ html {
   animation: speechBubbleFade 3s ease-in-out 2s infinite;
 }
 
-@font-face {
-  font-family: "Freesentation-9Black";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2")
-    format("woff2");
-  font-weight: 900;
-  font-style: normal;
-}
+/* Import Freesentation from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Freesentation:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-@font-face {
-  font-family: "Freesentation-6SemiBold";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-6SemiBold.woff2")
-    format("woff2");
+/* Freesentation font classes for easy use */
+.font-freesentation-light {
+  font-family: "Freesentation", sans-serif;
+  font-weight: 300;
+}
+.font-freesentation-regular {
+  font-family: "Freesentation", sans-serif;
+  font-weight: 400;
+}
+.font-freesentation-medium {
+  font-family: "Freesentation", sans-serif;
+  font-weight: 500;
+}
+.font-freesentation-semibold {
+  font-family: "Freesentation", sans-serif;
   font-weight: 600;
-  font-style: normal;
-  font-display: swap;
+}
+.font-freesentation-bold {
+  font-family: "Freesentation", sans-serif;
+  font-weight: 700;
+}
+.font-freesentation-black {
+  font-family: "Freesentation", sans-serif;
+  font-weight: 900;
 }
 
 @font-face {
@@ -197,4 +209,55 @@ html {
   100% {
     transform: translateY(0);
   }
+}
+
+/* 시계 알람 애니메이션 */
+@keyframes clockAlarm {
+  0% {
+    transform: rotate(-2deg);
+  }
+  6.25% {
+    transform: rotate(2deg);
+  }
+  12.5% {
+    transform: rotate(-2deg);
+  }
+  18.75% {
+    transform: rotate(2deg);
+  }
+  25% {
+    transform: rotate(-2deg);
+  }
+  /* 25% ~ 100%는 정지 상태 (1.5초 쉬기) */
+  100% {
+    transform: rotate(-2deg);
+  }
+}
+
+.clock-alarm {
+  animation: clockAlarm 1.5s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+/* 자동 흐름 애니메이션 */
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.auto-flow-content {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: scrollLeft 8s linear infinite;
+}
+
+.flow-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
 }

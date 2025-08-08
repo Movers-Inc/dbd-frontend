@@ -8,7 +8,7 @@ import {
 } from "../../../utils/googleSheets";
 
 interface FormData {
-  plan: "Monthly" | "Yearly";
+  plan: "1개월" | "3개월" | "12개월";
   bankName: string;
   cardNumber1: string;
   cardNumber2: string;
@@ -31,7 +31,7 @@ const ApplyContent: FC<ApplyContentProps> = () => {
     formState: { errors }
   } = useForm<FormData>({
     defaultValues: {
-      plan: "Yearly",
+      plan: "12개월",
       bankName: "",
       cardNumber1: "",
       cardNumber2: "",
@@ -76,7 +76,15 @@ const ApplyContent: FC<ApplyContentProps> = () => {
     // PhoneNumberPopup 먼저 닫기
     setShowPhonePopup(false);
 
-    // 팝업이 닫힌 후 데이터 제출
+    // AlertPopup 설정 및 표시
+    setAlertConfig({
+      title: "알림 신청이 완료됐어요",
+      message: "AI 코칭이 가능해질 때 입력하신 번호로 바로 연락드릴게요.",
+      confirmText: "확인",
+      showCancel: false
+    });
+    setShowAlertPopup(true);
+    // 팝업이 닫힌 후 데이터 제출 및 AlertPopup 표시
     setTimeout(async () => {
       await submitDataToSheets(phoneNumber);
     }, 300); // 팝업 애니메이션 시간 고려
@@ -109,7 +117,7 @@ const ApplyContent: FC<ApplyContentProps> = () => {
     }
   };
 
-  const handlePlanSelect = (plan: "Monthly" | "Yearly") => {
+  const handlePlanSelect = (plan: "1개월" | "3개월" | "12개월") => {
     setValue("plan", plan);
   };
 
@@ -118,7 +126,16 @@ const ApplyContent: FC<ApplyContentProps> = () => {
   };
 
   const getPrice = () => {
-    return watchedPlan === "Monthly" ? "144,000" : "84,000";
+    switch (watchedPlan) {
+      case "1개월":
+        return "214,800";
+      case "3개월":
+        return "118,800";
+      case "12개월":
+        return "94,800";
+      default:
+        return "94,800";
+    }
   };
 
   const isFormValid = () => {
@@ -157,66 +174,98 @@ const ApplyContent: FC<ApplyContentProps> = () => {
             </p>
 
             {/* 플랜 카드들 */}
-            <div className="flex flex-row gap-2">
-              {/* Monthly 플랜 */}
+            <div className="flex flex-col gap-2">
+              {/* 1개월 플랜 */}
               <div
-                onClick={() => handlePlanSelect("Monthly")}
+                onClick={() => handlePlanSelect("1개월")}
                 className={`w-full rounded-xl p-4 cursor-pointer border-2 ${
-                  watchedPlan === "Monthly"
+                  watchedPlan === "1개월"
                     ? "border-[#1976D2]"
                     : "bg-[#F6F6F6] border-transparent"
                 }`}
                 style={
-                  watchedPlan === "Monthly"
+                  watchedPlan === "1개월"
                     ? { backgroundColor: "rgba(25, 118, 210, 0.1)" }
                     : {}
                 }
               >
                 <div className="flex flex-row justify-between items-center">
                   <span className="text-[14px] font-freesentation text-black">
-                    Monthly
+                    1개월
                   </span>
                   <div className="flex flex-col items-end leading-none">
                     <span className="text-[14px] font-freesentation text-black leading-none">
                       <span className="text-[18px]" style={{ fontWeight: 900 }}>
-                        12,000
+                        17,900
                       </span>
                       원/월
                     </span>
                     <span className="text-[14px] font-freesentation text-[#777777] leading-none">
-                      144,000원/연
+                      214,800원/연
                     </span>
                   </div>
                 </div>
               </div>
 
-              {/* Yearly 플랜 */}
+              {/* 3개월 플랜 */}
               <div
-                onClick={() => handlePlanSelect("Yearly")}
+                onClick={() => handlePlanSelect("3개월")}
                 className={`w-full rounded-xl p-4 cursor-pointer border-2 ${
-                  watchedPlan === "Yearly"
+                  watchedPlan === "3개월"
                     ? "border-[#1976D2]"
                     : "bg-[#F6F6F6] border-transparent"
                 }`}
                 style={
-                  watchedPlan === "Yearly"
+                  watchedPlan === "3개월"
                     ? { backgroundColor: "rgba(25, 118, 210, 0.1)" }
                     : {}
                 }
               >
                 <div className="flex flex-row justify-between items-center">
                   <span className="text-[14px] font-freesentation text-black">
-                    Yearly
+                    3개월
                   </span>
                   <div className="flex flex-col items-end leading-none">
                     <span className="text-[14px] font-freesentation text-black leading-none">
                       <span className="text-[18px]" style={{ fontWeight: 900 }}>
-                        7,000
+                        9,900
                       </span>
                       원/월
                     </span>
                     <span className="text-[14px] font-freesentation text-[#777777] leading-none">
-                      84,000원/연
+                      118,800원/3개월
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 12개월 플랜 */}
+              <div
+                onClick={() => handlePlanSelect("12개월")}
+                className={`w-full rounded-xl p-4 cursor-pointer border-2 ${
+                  watchedPlan === "12개월"
+                    ? "border-[#1976D2]"
+                    : "bg-[#F6F6F6] border-transparent"
+                }`}
+                style={
+                  watchedPlan === "12개월"
+                    ? { backgroundColor: "rgba(25, 118, 210, 0.1)" }
+                    : {}
+                }
+              >
+                <div className="flex flex-row justify-between items-center">
+                  <span className="text-[14px] font-freesentation text-black">
+                    12개월
+                  </span>
+                  <div className="flex flex-col items-end leading-none">
+                    <span className="text-[14px] font-freesentation text-black leading-none">
+                      <span className="text-[18px]" style={{ fontWeight: 900 }}>
+                        7,900
+                      </span>
+                      원/월
+                    </span>
+                    <span className="text-[14px] font-freesentation text-[#777777] leading-none">
+                      94,800원/연
                     </span>
                   </div>
                 </div>
