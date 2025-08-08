@@ -14,22 +14,22 @@ const ApplyPage: React.FC<ApplyPageProps> = () => {
   const [logoAnimationComplete, setLogoAnimationComplete] = useState(false);
 
   useEffect(() => {
-    // 컴포넌트가 마운트된 즉시 텍스트 애니메이션 시작
+    // 컴포넌트가 마운트된 후 텍스트 애니메이션 시작
     const textTimer = setTimeout(() => {
       setShowAnimation(true);
-    }, 100); // 300ms -> 100ms로 단축
+    }, 300);
 
     // 텍스트 애니메이션 완료 후 로고/텍스트 이동 애니메이션 시작
     const transitionTimer = setTimeout(() => {
       setStartTransition(true);
       // 로고 이동과 동시에 ApplyContent 표시 시작
       setShowApplyContent(true);
-    }, 2800); // 3000ms -> 2800ms로 단축
+    }, 3000); // 텍스트 애니메이션 시간 + 잠시 대기
 
     // 로고 애니메이션 완료 후 상태 변경
     const logoCompleteTimer = setTimeout(() => {
       setLogoAnimationComplete(true);
-    }, 3500); // 3700ms -> 3500ms로 단축
+    }, 3700); // 이동 애니메이션 완료 시점
 
     return () => {
       clearTimeout(textTimer);
@@ -52,30 +52,13 @@ const ApplyPage: React.FC<ApplyPageProps> = () => {
   };
   return (
     <>
-      {/* 고정 로고 컨테이너 */}
-      {logoAnimationComplete && (
-        <div
-          className="fixed top-4 right-0 w-[170px] h-auto"
-          style={{ zIndex: 70 }}
-        >
-          <img
-            src="/logo.svg"
-            alt="logo"
-            className="w-[170px] h-auto"
-            style={{
-              opacity: 0.3
-            }}
-          />
-        </div>
-      )}
-
       <div className="h-screen w-full bg-white flex flex-col relative overflow-hidden">
         {/* 애니메이션 중인 로고 */}
         {!logoAnimationComplete && (
           <div
             className="absolute transition-all duration-700 ease-in-out"
             style={{
-              zIndex: 70,
+              zIndex: 50,
               top: startTransition ? "16px" : "88px",
               left: "50%",
               transform: startTransition
@@ -101,7 +84,10 @@ const ApplyPage: React.FC<ApplyPageProps> = () => {
           className={`absolute top-1/2 transform -translate-y-1/2 transition-all duration-700 ease-in-out ${
             startTransition ? "opacity-0 translate-y-[-60%]" : "opacity-100"
           }`}
-          style={{ zIndex: 60 }}
+          style={{
+            zIndex: 60,
+            pointerEvents: "none"
+          }}
         >
           <div className="text-center content">
             <p
@@ -132,7 +118,9 @@ const ApplyPage: React.FC<ApplyPageProps> = () => {
             transformOrigin: "center center"
           }}
         >
-          {showApplyContent && <ApplyContent />}
+          {showApplyContent && (
+            <ApplyContent logoAnimationComplete={logoAnimationComplete} />
+          )}
         </div>
       </div>
     </>

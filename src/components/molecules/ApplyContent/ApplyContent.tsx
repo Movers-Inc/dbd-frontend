@@ -20,9 +20,11 @@ interface FormData {
   phone: string;
 }
 
-interface ApplyContentProps {}
+interface ApplyContentProps {
+  logoAnimationComplete?: boolean;
+}
 
-const ApplyContent: FC<ApplyContentProps> = () => {
+const ApplyContent: FC<ApplyContentProps> = ({ logoAnimationComplete }) => {
   const {
     register,
     handleSubmit,
@@ -125,16 +127,16 @@ const ApplyContent: FC<ApplyContentProps> = () => {
     setValue("bankName", bankName);
   };
 
-  const getPrice = () => {
+  const getButtonText = () => {
     switch (watchedPlan) {
       case "1개월":
-        return "214,800";
+        return "3일 무료체험 후 월 17,900원 결제하기";
       case "3개월":
-        return "118,800";
+        return "3일 무료체험 후 3개월 29,700원 결제하기";
       case "12개월":
-        return "94,800";
+        return "3일 무료체험 후 연 94,800원 결제하기";
       default:
-        return "94,800";
+        return "3일 무료체험 후 연 94,800원 결제하기";
     }
   };
 
@@ -151,19 +153,35 @@ const ApplyContent: FC<ApplyContentProps> = () => {
       <div className="flex-1 pt-[88px]">
         <form id="apply-form" onSubmit={handleSubmit(onSubmit)}>
           {/* 헤더 영역 */}
-          <div className="inline-block">
-            <h1
-              className="text-[24px] text-black px-5"
-              style={{
-                fontFamily: "S-CoreDream-5Medium",
-                letterSpacing: "-2.5%"
-              }}
-            >
-              데이바이데이
-              <br /> 3일 무료체험 신청하기
-            </h1>
-            {/* 텍스트 너비보다 조금 더 긴 border */}
-            <div className="w-[100%] h-[1px] bg-black mt-5"></div>
+          <div className="w-full relative">
+            <div className="inline-block relative">
+              <h1
+                className="text-[24px] text-black px-5"
+                style={{
+                  fontFamily: "S-CoreDream-5Medium",
+                  letterSpacing: "-2.5%"
+                }}
+              >
+                데이바이데이
+                <br /> 3일 무료체험 신청하기
+              </h1>
+
+              {/* 텍스트 너비보다 조금 더 긴 border */}
+              <div className="w-[100%] h-[1px] bg-black mt-5"></div>
+            </div>
+            {/* 로고 - 애니메이션 완료 후 표시 */}
+            {logoAnimationComplete && (
+              <div className="absolute right-0 bottom-10 w-[170px] h-auto">
+                <img
+                  src="/logo.svg"
+                  alt="logo"
+                  className="w-[170px] h-auto"
+                  style={{
+                    opacity: 0.3
+                  }}
+                />
+              </div>
+            )}
           </div>
 
           {/* 플랜 영역 */}
@@ -193,7 +211,7 @@ const ApplyContent: FC<ApplyContentProps> = () => {
                   <span className="text-[14px] font-freesentation text-black">
                     1개월
                   </span>
-                  <div className="flex flex-col items-end leading-none">
+                  <div className="flex flex-col items-end gap-[2px]">
                     <span className="text-[14px] font-freesentation text-black leading-none">
                       <span className="text-[18px]" style={{ fontWeight: 900 }}>
                         17,900
@@ -225,7 +243,7 @@ const ApplyContent: FC<ApplyContentProps> = () => {
                   <span className="text-[14px] font-freesentation text-black">
                     3개월
                   </span>
-                  <div className="flex flex-col items-end leading-none">
+                  <div className="flex flex-col items-end gap-[2px]">
                     <span className="text-[14px] font-freesentation text-black leading-none">
                       <span className="text-[18px]" style={{ fontWeight: 900 }}>
                         9,900
@@ -233,7 +251,7 @@ const ApplyContent: FC<ApplyContentProps> = () => {
                       원/월
                     </span>
                     <span className="text-[14px] font-freesentation text-[#777777] leading-none">
-                      118,800원/3개월
+                      29,700원/3개월
                     </span>
                   </div>
                 </div>
@@ -257,7 +275,7 @@ const ApplyContent: FC<ApplyContentProps> = () => {
                   <span className="text-[14px] font-freesentation text-black">
                     12개월
                   </span>
-                  <div className="flex flex-col items-end leading-none">
+                  <div className="flex flex-col items-end gap-[2px]">
                     <span className="text-[14px] font-freesentation text-black leading-none">
                       <span className="text-[18px]" style={{ fontWeight: 900 }}>
                         7,900
@@ -594,17 +612,17 @@ const ApplyContent: FC<ApplyContentProps> = () => {
 
       {/* 하단 고정 버튼 */}
       <div className="fixed bottom-0 left-0 right-0">
-        {/* 그라데이션 오버레이 */}
-        <div className="h-20 bg-gradient-to-t from-white to-transparent"></div>
-        <div className="bg-white px-5 pb-10">
+        <div className="bg-white px-5 pb-10 relative">
+          {/* 그라데이션 오버레이 - 버튼 위 20px만 */}
+          <div className="absolute top-[-20px] left-0 right-0 h-[20px]  bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
           <button
             type="button"
             onClick={() => setShowPhonePopup(true)}
-            className={`w-full px-4 py-[18px] rounded-[12px] text-[20px] font-medium font-freesentation bg-[#1976D2] text-white whitespace-nowrap transition-opacity ${
+            className={`w-full px-4 py-[18px] rounded-[12px] text-[18px] font-medium font-freesentation bg-[#1976D2] text-white whitespace-nowrap transition-opacity ${
               isFormValid() ? "opacity-100" : "opacity-20"
             }`}
           >
-            3일 무료체험 후 연 {getPrice()}원 결제하기
+            {getButtonText()}
           </button>
         </div>
       </div>
