@@ -75,6 +75,25 @@ html {
   animation: textScale 2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
+@keyframes floating {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-floating {
+  animation: floating 2s ease-in-out infinite;
+}
+
+.animate-floating-delayed {
+  animation: floating 2.5s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
 /* 스크롤바 숨기기 */
 .overflow-y-scroll {
   scrollbar-width: none; /* Firefox */
@@ -83,6 +102,38 @@ html {
 
 .overflow-y-scroll::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
+}
+
+/* 말풍선 애니메이션 */
+@keyframes speechBubbleFade {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.speech-bubble-1 {
+  animation: speechBubbleFade 3s ease-in-out 0s infinite;
+}
+
+.speech-bubble-2 {
+  animation: speechBubbleFade 3s ease-in-out 1s infinite;
+}
+
+.speech-bubble-3 {
+  animation: speechBubbleFade 3s ease-in-out 2s infinite;
 }
 
 @font-face {
@@ -100,4 +151,14 @@ html {
   font-weight: 600;
   font-style: normal;
   font-display: swap;
+}
+
+/* 스크롤바 숨김 */
+.overflow-x-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.overflow-x-scroll {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
