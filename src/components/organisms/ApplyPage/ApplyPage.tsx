@@ -56,10 +56,10 @@ const ApplyPage: React.FC<ApplyPageProps> = () => {
         {/* 애니메이션 중인 로고 */}
         {!logoAnimationComplete && (
           <div
-            className="absolute transition-all duration-700 ease-in-out relative"
+            className="absolute transition-all duration-700 ease-in-out"
             style={{
               zIndex: 50,
-              top: startTransition ? "16px" : "88px",
+              top: startTransition ? "16px" : "20%",
               left: "50%",
               transform: startTransition
                 ? "translateX(calc(50vw - 170px))"
@@ -81,8 +81,8 @@ const ApplyPage: React.FC<ApplyPageProps> = () => {
 
         {/* 메인 텍스트 영역 */}
         <div
-          className={`absolute top-1/2 transform transition-all duration-700 ease-in-out ${
-            startTransition ? "opacity-0 translate-y-[-60%]" : "opacity-100"
+          className={`absolute bottom-[20%] left-1/2 transform -translate-x-1/2 transition-all duration-700 ease-in-out ${
+            startTransition ? "opacity-0 translate-y-4" : "opacity-100"
           }`}
           style={{
             zIndex: 60,
