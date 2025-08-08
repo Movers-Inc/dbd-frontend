@@ -121,7 +121,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
       case 3:
         return (
           <div className="flex flex-col items-center w-full mt-[56px]">
-            <p className="text-[24px] text-black font-freesentation font-medium mb-4">
+            <p className="text-[24px] text-black font-freesentation-medium mb-4">
               [1개월 감량 체중 비교]
             </p>
             <div className="h-[300px] w-full border-b border-black mb-6 flex items-end justify-center gap-[22.5px]">
@@ -194,7 +194,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
                 </div>
               </div>
             </div>
-            <p className="text-[12px] text-black font-freesentation font-light mb-4">
+            <p className="text-[12px] text-black font-freesentation-light mb-4">
               출처 : Hollis et al., AJPM(2008)
             </p>
           </div>
@@ -229,7 +229,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
                   <div className="text-[20px] font-freesentation-semibold font-medium text-[#444444]">
                     맞다, <br /> 기록해야 하는데...
                   </div>
-                  <div className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#EBEBEB]"></div>
+                  <div className="absolute bottom-[-8px] left-2/3 transform -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-r-0 border-t-[8px] border-t-[#EBEBEB]"></div>
                 </div>
 
                 <div
@@ -241,7 +241,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
                   <div className="text-[20px] font-freesentation-semibold font-medium text-[#444444]">
                     먹고 싶은 게, <br /> 정말 맞을까?
                   </div>
-                  <div className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#EBEBEB]"></div>
+                  <div className="absolute bottom-[-8px] left-2/3 transform -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-r-0 border-t-[8px] border-t-[#EBEBEB]"></div>
                 </div>
 
                 <div
@@ -253,7 +253,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
                   <div className="text-[20px] font-freesentation-semibold font-medium text-[#444444]">
                     조금만 참아보자...
                   </div>
-                  <div className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#EBEBEB]"></div>
+                  <div className="absolute bottom-[-8px] left-2/3 transform -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-r-0 border-t-[8px] border-t-[#EBEBEB]"></div>
                 </div>
               </>
             )}
@@ -264,34 +264,88 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
         return (
           <div className="flex flex-col items-start justify-start px-5">
             <div
-              className="grid grid-cols-5 gap-3 w-full fixed top-1/2 left-1/2 transform -translate-x-1/2"
+              className="flex flex-col items-center w-full fixed top-1/2 left-1/2 transform -translate-x-1/2"
               style={{ zIndex: 1000 }}
             >
               {/* 첫 번째 행: Crying 5개 */}
-              <LottieAnimation type="cry" width={70} height={70} />
-              <div className="relative">
-                <LottieAnimation type="cry" width={70} height={70} />
-                {/* 기록 실패! 말풍선 */}
-                <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-[#EBEBEB] px-3 py-2 rounded-lg text-[#444444] font-freesentation-semibold font-medium text-[16px] whitespace-nowrap animate-floating">
-                  기록 실패!
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-[#EBEBEB]"></div>
+              <div className="flex">
+                <LottieAnimation
+                  type="cry"
+                  width={70}
+                  height={70}
+                  className=""
+                />
+                <div className="relative">
+                  <LottieAnimation
+                    type="cry"
+                    width={70}
+                    height={70}
+                    className=""
+                  />
+                  {/* 기록 실패! 말풍선 */}
+                  <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-[#EBEBEB] px-3 py-2 rounded-lg text-[#444444] font-freesentation-semibold font-medium text-[16px] whitespace-nowrap animate-floating">
+                    기록 실패!
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-[#EBEBEB]"></div>
+                  </div>
                 </div>
+                <LottieAnimation
+                  type="cry"
+                  width={70}
+                  height={70}
+                  className=""
+                />
+                <LottieAnimation
+                  type="cry"
+                  width={70}
+                  height={70}
+                  className=""
+                />
+                <LottieAnimation
+                  type="cry"
+                  width={70}
+                  height={70}
+                  className=""
+                />
               </div>
-              <LottieAnimation type="cry" width={70} height={70} />
-              <LottieAnimation type="cry" width={70} height={70} />
-              <LottieAnimation type="cry" width={70} height={70} />
 
               {/* 두 번째 행: Crying 4개, Smile 1개 */}
-              <LottieAnimation type="cry" width={70} height={70} />
-              <LottieAnimation type="cry" width={70} height={70} />
-              <LottieAnimation type="cry" width={70} height={70} />
-              <LottieAnimation type="cry" width={70} height={70} />
-              <div className="relative">
-                <LottieAnimation type="smile" width={70} height={70} />
-                {/* 기록 성공! 말풍선 */}
-                <div className="absolute -bottom-12 left-1/3 transform -translate-x-1/2 bg-[#FFF4D4] px-3 py-2 rounded-lg text-[#444444] font-freesentation-semibold font-medium text-[16px] whitespace-nowrap animate-floating-delayed">
-                  기록 성공!
-                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-[#FFF4D4]"></div>
+              <div className="flex">
+                <LottieAnimation
+                  type="cry"
+                  width={70}
+                  height={70}
+                  className=""
+                />
+                <LottieAnimation
+                  type="cry"
+                  width={70}
+                  height={70}
+                  className=""
+                />
+                <LottieAnimation
+                  type="cry"
+                  width={70}
+                  height={70}
+                  className=""
+                />
+                <LottieAnimation
+                  type="cry"
+                  width={70}
+                  height={70}
+                  className=""
+                />
+                <div className="relative">
+                  <LottieAnimation
+                    type="smile"
+                    width={70}
+                    height={70}
+                    className=""
+                  />
+                  {/* 기록 성공! 말풍선 */}
+                  <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-[#FFF4D4] px-3 py-2 rounded-lg text-[#444444] font-freesentation-semibold font-medium text-[16px] whitespace-nowrap animate-floating-delayed">
+                    기록 성공!
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-[#FFF4D4]"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -324,7 +378,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
                 <br />
                 야식 먹었어요 ㅠㅠ
               </div>
-              <div className="absolute bottom-[-8px] left-4 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#EBEBEB]"></div>
+              <div className="absolute bottom-[-8px] left-4 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[12px] border-l-[#EBEBEB]"></div>
             </div>
 
             {/* 왼쪽 아래 중간 말풍선 */}
@@ -336,7 +390,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
                 <br />
                 조금씩 빼봐요 😊
               </div>
-              <div className="absolute bottom-[-8px] right-4 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#1976D2]"></div>
+              <div className="absolute bottom-[-8px] right-4 w-0 h-0 border-l-[12px] border-l-transparent border-r-0 border-t-[8px] border-t-[#1976D2]"></div>
             </div>
           </div>
         );

@@ -144,7 +144,19 @@ const ApplyContent: FC<ApplyContentProps> = ({ logoAnimationComplete }) => {
     return (
       watchedBankName !== "" &&
       watchedCardNumber1 &&
-      watchedCardNumber1.length === 4
+      watchedCardNumber1.length === 4 &&
+      watchedCardNumber2 &&
+      watchedCardNumber2.length === 4 &&
+      watchedCardNumber3 &&
+      watchedCardNumber3.length === 4 &&
+      watchedCardNumber4 &&
+      watchedCardNumber4.length === 4 &&
+      watchedCvc &&
+      watchedCvc.length === 3 &&
+      watchedExpiryDate &&
+      watchedExpiryDate.length === 4 &&
+      watchedCardPassword &&
+      watchedCardPassword.length === 2
     );
   };
   return (
@@ -617,7 +629,11 @@ const ApplyContent: FC<ApplyContentProps> = ({ logoAnimationComplete }) => {
           <div className="absolute top-[-20px] left-0 right-0 h-[20px]  bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
           <button
             type="button"
-            onClick={() => setShowPhonePopup(true)}
+            onClick={() => {
+              if (isFormValid()) {
+                setShowPhonePopup(true);
+              }
+            }}
             className={`w-full px-4 py-[18px] rounded-[12px] text-[18px] font-medium font-freesentation bg-[#1976D2] text-white whitespace-nowrap transition-opacity ${
               isFormValid() ? "opacity-100" : "opacity-20"
             }`}
