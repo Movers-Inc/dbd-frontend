@@ -153,6 +153,22 @@ html {
   font-display: swap;
 }
 
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "S-CoreDream-5Medium";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff")
+    format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
 /* 스크롤바 숨김 */
 .overflow-x-scroll::-webkit-scrollbar {
   display: none;
@@ -161,4 +177,24 @@ html {
 .overflow-x-scroll {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+/* 텍스트 reveal 애니메이션 */
+.content {
+  word-spacing: 2px;
+  overflow: hidden;
+}
+
+.letter {
+  display: inline-block;
+  animation: reveal 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes reveal {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }

@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "classnames": "^2.5.1",
+    "framer-motion": "^12.23.12",
+    "googleapis": "^155.0.0",
     "lottie-react": "^2.4.1",
     "next": "15.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-hook-form": "^7.62.0",
     "swiper": "^11.2.10"
   },
   "devDependencies": {

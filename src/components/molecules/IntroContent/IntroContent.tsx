@@ -410,21 +410,54 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
               style={{
                 touchAction: "pan-x",
                 WebkitOverflowScrolling: "touch",
-                overscrollBehavior: "contain"
+                overscrollBehavior: "contain",
+                pointerEvents: "auto",
+                isolation: "isolate"
               }}
               onTouchStart={(e) => {
                 e.nativeEvent.stopImmediatePropagation();
                 e.stopPropagation();
+                // 터치 시작 좌표 저장
+                const touch = e.touches[0];
+                (e.currentTarget as any).startX = touch.clientX;
+                (e.currentTarget as any).startY = touch.clientY;
+                // 부모의 터치 이벤트 완전히 차단
+                if (e.currentTarget.parentElement) {
+                  e.currentTarget.parentElement.style.touchAction = "none";
+                }
               }}
               onTouchMove={(e) => {
                 e.nativeEvent.stopImmediatePropagation();
                 e.stopPropagation();
+                // 수평 스크롤만 허용, 수직 스크롤 차단
+                const touch = e.touches[0];
+                const deltaX = Math.abs(
+                  touch.clientX - (e.currentTarget as any).startX || 0
+                );
+                const deltaY = Math.abs(
+                  touch.clientY - (e.currentTarget as any).startY || 0
+                );
+
+                if (deltaX > deltaY) {
+                  // 수평 드래그가 더 크면 스와이퍼 이벤트 차단
+                  e.preventDefault();
+                }
               }}
               onTouchEnd={(e) => {
                 e.nativeEvent.stopImmediatePropagation();
                 e.stopPropagation();
+                // 부모의 터치 액션 복원
+                if (e.currentTarget.parentElement) {
+                  e.currentTarget.parentElement.style.touchAction = "auto";
+                }
               }}
               onMouseDown={(e) => {
+                e.stopPropagation();
+                // 마우스 드래그도 부모로 전파되지 않도록
+                e.preventDefault();
+              }}
+              onWheel={(e) => {
+                // 휠 이벤트도 차단하여 스와이퍼로 전파되지 않도록
                 e.stopPropagation();
               }}
             >
@@ -435,7 +468,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
                   className="h-[140px] w-auto mb-2"
                   style={{ userSelect: "none", pointerEvents: "none" }}
                 />
-                <span className="text-[14px] font-freesentation-regular text-center text-[#444444]">
+                <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
                   # 82일 연속 기록 # 13kg 감량
                 </span>
               </div>
@@ -446,7 +479,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
                   className="h-[140px] w-auto mb-2"
                   style={{ userSelect: "none", pointerEvents: "none" }}
                 />
-                <span className="text-[14px] font-freesentation-regular text-center text-[#444444]">
+                <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
                   # 122일 연속 기록 # 15kg 감량
                 </span>
               </div>
@@ -457,7 +490,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
                   className="h-[140px] w-auto mb-2"
                   style={{ userSelect: "none", pointerEvents: "none" }}
                 />
-                <span className="text-[14px] font-freesentation-regular text-center text-[#444444]">
+                <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
                   # 95일 연속 기록 # 11kg 감량
                 </span>
               </div>
@@ -468,7 +501,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
                   className="h-[140px] w-auto mb-2"
                   style={{ userSelect: "none", pointerEvents: "none" }}
                 />
-                <span className="text-[14px] font-freesentation-regular text-center text-[#444444]">
+                <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
                   # 55일 연속 기록 # 7kg 감량
                 </span>
               </div>
@@ -479,7 +512,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
                   className="h-[140px] w-auto mb-2"
                   style={{ userSelect: "none", pointerEvents: "none" }}
                 />
-                <span className="text-[14px] font-freesentation-regular text-center text-[#444444]">
+                <span className="text-[14px] font-freesentation-regular text-center text-[#444444] whitespace-nowrap">
                   # 158일 연속 기록 # 16kg 감량
                 </span>
               </div>
