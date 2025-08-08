@@ -202,7 +202,7 @@ const IntroContent: FC<IntroContentProps> = ({ page, isActive = false }) => {
 
       case 4:
         return (
-          <div className="flex flex-col items-start justify-start pt-16 overflow-hidden relative h-[600px]">
+          <div className="flex flex-col items-start justify-start overflow-hidden relative h-[600px]">
             <video
               src="/intro/4/page4.mp4"
               autoPlay

@@ -55,14 +55,11 @@ const AlertPopup: FC<AlertPopupProps> = ({
                   alt="alert"
                   className="w-13 h-13 mb-3 self-center"
                 />
-                <h2
-                  className="text-[24px] font-freesentation text-center text-black mb-2"
-                  style={{ fontWeight: 600 }}
-                >
+                <h2 className="text-[24px] font-freesentation-semibold text-center text-black mb-2">
                   {title}
                 </h2>
                 <p
-                  className="text-[14px] font-freesentation text-center mb-6"
+                  className="text-[14px] font-freesentation-regular text-center mb-6"
                   style={{ color: "#121212", lineHeight: "150%" }}
                 >
                   {message}
@@ -72,14 +69,14 @@ const AlertPopup: FC<AlertPopupProps> = ({
                   {showCancel && (
                     <button
                       onClick={onClose}
-                      className="w-full py-3 px-4 rounded-[12px] border border-[#E0E0E0] text-[16px] font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                      className="w-full py-3 px-4 rounded-[12px] border border-[#E0E0E0] text-[16px] font-freesentation-medium text-gray-600 hover:bg-gray-50 transition-colors"
                     >
                       취소
                     </button>
                   )}
                   <button
                     onClick={handleConfirm}
-                    className="w-full py-3 px-4 rounded-[12px] bg-[#F5F5F7] text-[16px] font-medium text-[#787878] hover:bg-gray-50 transition-colors"
+                    className="w-full py-3 px-4 rounded-[12px] bg-[#F5F5F7] text-[16px] font-freesentation-medium text-[#787878] hover:bg-gray-50 transition-colors"
                   >
                     {confirmText}
                   </button>

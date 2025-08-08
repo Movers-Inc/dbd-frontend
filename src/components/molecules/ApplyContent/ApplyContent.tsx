@@ -634,7 +634,7 @@ const ApplyContent: FC<ApplyContentProps> = ({ logoAnimationComplete }) => {
                 setShowPhonePopup(true);
               }
             }}
-            className={`w-full px-4 py-[18px] rounded-[12px] text-[18px] font-medium font-freesentation bg-[#1976D2] text-white whitespace-nowrap transition-opacity ${
+            className={`w-full px-4 py-[18px] rounded-[12px] text-[18px] font-freesentation-medium bg-[#1976D2] text-white whitespace-nowrap transition-opacity ${
               isFormValid() ? "opacity-100" : "opacity-20"
             }`}
           >

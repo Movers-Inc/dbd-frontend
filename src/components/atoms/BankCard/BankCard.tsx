@@ -27,7 +27,7 @@ const BankCard = ({
         className="w-6 h-6 rounded-full"
       />
       <span
-        className="text-[14px] text-black text-center line-clamp-1"
+        className="text-[14px] font-freesentation-regular text-black text-center line-clamp-1"
         style={{ letterSpacing: "-2.5%" }}
       >
         {bankName}

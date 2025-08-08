@@ -90,14 +90,11 @@ const PhoneNumberPopup: FC<PhoneNumberPopupProps> = ({
                   className="h-auto object-cover rounded-xl"
                   style={{ width: 600 }}
                 />
-                <h2
-                  className="text-[24px] font-freesentation text-center text-black mb-2"
-                  style={{ fontWeight: 600 }}
-                >
+                <h2 className="text-[24px] font-freesentation-semibold text-center text-black mb-2">
                   AI 코칭 가능 인원이 가득 찼어요
                 </h2>
                 <p
-                  className="text-[14px] font-freesentation text-center mb-3"
+                  className="text-[14px] font-freesentation-regular text-center mb-3"
                   style={{ color: "#121212", lineHeight: "150%" }}
                 >
                   휴대폰번호를 남겨주시면 <br /> 이용 가능할 때 다시
@@ -116,7 +113,7 @@ const PhoneNumberPopup: FC<PhoneNumberPopupProps> = ({
                 <div className="flex gap-3">
                   <button
                     onClick={handleClose}
-                    className="flex-1 py-3 px-4 rounded-[12px] bg-[#F5F5F7] text-[16px] font-medium text-[#787878] hover:bg-gray-50 transition-colors"
+                    className="flex-1 py-3 px-4 rounded-[12px] bg-[#F5F5F7] text-[16px] font-freesentation-medium text-[#787878] hover:bg-gray-50 transition-colors"
                   >
                     닫기
                   </button>
@@ -125,7 +122,7 @@ const PhoneNumberPopup: FC<PhoneNumberPopupProps> = ({
                     disabled={
                       !phoneNumber.trim() || !isValidPhoneNumber(phoneNumber)
                     }
-                    className={`flex-1 py-3 px-4 rounded-[12px] text-[16px] font-medium transition-colors ${
+                    className={`flex-1 py-3 px-4 rounded-[12px] text-[16px] font-freesentation-medium transition-colors ${
                       phoneNumber.trim() && isValidPhoneNumber(phoneNumber)
                         ? "bg-[#1976D2] text-white hover:bg-[#1565C0]"
                         : "bg-gray-200 text-gray-400 cursor-not-allowed"
