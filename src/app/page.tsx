@@ -10,7 +10,7 @@ const HomePage: NextPage = () => {
   const [isCovering, setIsCovering] = useState(false); // 덮는 애니메이션
   const [isUncovering, setIsUncovering] = useState(false); // 사라지는 애니메이션
   const [showApply, setShowApply] = useState(false);
-
+  // 12312
   const handleIntroComplete = () => {
     // 1단계: 파란색 배경이 오른쪽에서 화면을 덮음
     setIsCovering(true);
